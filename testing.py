@@ -5,7 +5,7 @@
 from sqlalchemy import create_engine
 import mysql.connector
 def connect():
-	cnx = mysql.connector.connect(user="springadmin", password="Hdds2401", host="hdds2401-leo.mysql.database.azure.com", port=3306, database="mysql")
+	cnx = mysql.connector.connect(user="", password="", host="", port=3306, database="")
 	
 	print(cnx)
 	cursor = cnx.cursor()
