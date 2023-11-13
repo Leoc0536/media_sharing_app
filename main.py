@@ -2,8 +2,8 @@ from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 import uvicorn
-
-app = FastAPI()
+from blob_connector import BlobConnector
+app = FastAPI(description="Sample FastAPI App")
 
 template = Jinja2Templates(directory="template")
 
@@ -20,6 +20,11 @@ async def say_hello(name: str):
 @app.get("/helloworld/{name}", response_class=HTMLResponse)
 async def say_hello(request: Request, name: str):
 	return template.TemplateResponse("index.html", {"request": request, "name": name})
+
+@app.get("/azure-blob")
+async def create_upload_file():
+	blob = BlobConnector()
+	blob.connect()
 
 if __name__ == '__main__':
 	uvicorn.run('main:app')
