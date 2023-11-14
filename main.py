@@ -3,6 +3,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 import uvicorn
 from blob_connector import BlobConnector
+from database_connector import MySQLConnector
 app = FastAPI(description="Sample FastAPI App")
 
 template = Jinja2Templates(directory="template")
@@ -25,6 +26,11 @@ async def say_hello(request: Request, name: str):
 async def create_upload_file():
 	blob = BlobConnector()
 	blob.connect()
-
+	
+@app.get('/mysql')
+async def connect_mysql():
+	mysql = MySQLConnector()
+	mysql.connect()
+	
 if __name__ == '__main__':
 	uvicorn.run('main:app')
