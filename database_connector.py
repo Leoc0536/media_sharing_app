@@ -7,7 +7,7 @@ class MySQLConnector:
 	def __init__(self):
 		load_dotenv()
 	def connect(self):
-		username = os.getenv("username")
+		username = os.getenv("db_username")
 		password = os.getenv("password")
 		host = os.getenv("host")
 		database = os.getenv('database')
