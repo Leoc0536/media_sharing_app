@@ -20,6 +20,8 @@ class BlobConnector:
 			print(_)
 		service.close()
 
+
 if __name__ == '__main__':
 	connector = BlobConnector()
 	connector.connect()
+	

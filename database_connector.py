@@ -4,9 +4,8 @@ import os
 from dotenv import load_dotenv
 
 class MySQLConnector:
-	def __init__(self):
-		load_dotenv()
 	def connect(self):
+		load_dotenv()
 		username = os.getenv("db_username")
 		password = os.getenv("password")
 		host = os.getenv("host")
@@ -24,6 +23,8 @@ class MySQLConnector:
 		print("close")
 		cursor.close()
 	
+	
 if __name__ == '__main__':
-    connector = MySQLConnector()
-    connector.connect()
+	connector = MySQLConnector()
+	connector.connect()
+	
