@@ -8,6 +8,25 @@
     <title>Document</title>
 </head>
 <body>
-    <h1> Item ID: {{ name }} </h1>
+<!--    <h1> Item ID: {{ name }} </h1>-->
+
+    <table>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Keywords</th>
+        <th>Date_of_media</th>
+        <th>Object URL</th>
+    {% for media in medias %}
+    <tr>
+        <td>{{ media.id }}</td>
+        <td>{{ media.name }}</td>
+        <td>{{ media.description }}</td>
+        <td>{{ media.keyword }}</td>
+        <td>{{ media.date_of_media }}</td>
+        <td>{{ media.object_url }}</td>
+    </tr>
+    {% endfor %}
+    </table>
 </body>
 </html>
