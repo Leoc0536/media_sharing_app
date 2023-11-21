@@ -11,6 +11,7 @@ from sql.database import engine, SessionLocal
 from sqlalchemy.orm import Session
 from sql.schemas import Media, Keyword
 from sql import models, schemas, crud
+from flask import Flask, request, redirect, render_template
 import ast
 import json
 import re
@@ -83,6 +84,34 @@ async def say_hello(request: Request, name: str):
 async def create_upload_file():
 	blob = BlobConnector()
 	blob.connect()
+
+@app.get('/upload-page')
+def upload_form():
+    return render_template('uploadPage.html')
+
+@app.post('/upload-page')
+def upload_file():
+    file = request.files['media']
+    if file:
+        file.save(file.filename)
+        return 'File uploaded successfully.'
+    else:
+        return 'No file uploaded.'
+
+@app.get('/display-page')
+def display():
+	blob = BlobConnector()
+	blob.connect()
+	blob_items = blob.container_client.list_blobs()
+	images = []
+	videos = []
+	for blob in blob_items:
+		blob_client = blob.container_client.get_blob_client(blob=blob.name)
+		if blob.name.endswith(('.png', '.jpeg', '.jpg', '.gif')):
+			images.append(blob_client.url)
+		elif blob.name.endswith(('.mp4', '.webm', '.ogg')):
+			videos.append(blob_client.url)
+	return render_template('displayPage.html', images=images, videos=videos)
 	
 
 
@@ -134,4 +163,4 @@ def read_medias():
 
 
 if __name__ == '__main__':
-	uvicorn.run('main:app')
+	uvicorn.run('app.main:app')
