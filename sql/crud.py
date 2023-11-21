@@ -20,7 +20,7 @@ def get_media_by_name(db: Session, media_name: str):
 	return db.query(models.Media).filter(models.Media.name == media_name).first()
 
 
-def get_media_by_keyword(db: Session):
+def get_media_by_keyword(db: Session, keyword: str):
 	db.query(Keyword.owner_id)
 	return None
 
