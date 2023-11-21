@@ -22,7 +22,7 @@ First, get default domain
 Then use terminal and locate to 
 ```shell
 git remote add azure <yourpath>
-git push azure main:master
+git push azure app.main:master
 ```
 
 ### Testing in Azure
