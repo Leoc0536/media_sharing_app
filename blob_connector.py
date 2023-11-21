@@ -20,13 +20,13 @@ class BlobConnector:
 			print(_)
 		service.close()
 
-		try:
-			container_client = service.get_container_client(container=container_name)
-			container_client.get_container_properties()
-		except Exception as e:
-			print(e)
-			print("Creating container...")
-			container_client = service.create_container(container_name)
+		# try:
+		# 	container_client = service.get_container_client(container=container_name)
+		# 	container_client.get_container_properties()
+		# except Exception as e:
+		# 	print(e)
+		# 	print("Creating container...")
+		# 	container_client = service.create_container(container_name)
 
 
 if __name__ == '__main__':

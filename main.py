@@ -29,11 +29,11 @@ async def create_upload_file():
 	blob = BlobConnector()
 	blob.connect()
 
-@app.route('/upload-page', methods=['GET'])
+@app.get('/upload-page')
 def upload_form():
     return render_template('uploadPage.html')
 
-@app.route('/upload-page', methods=['POST'])
+@app.post('/upload-page')
 def upload_file():
     file = request.files['media']
     if file:
