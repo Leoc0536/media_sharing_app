@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>displayPage</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        width: 500px;
+        margin: 0 auto;
+        margin-top: 100px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #d41717;
+      }
+
+      .container h2 {
+        text-align: center;
+      }
+
+      .container label, .container input[type="file"] {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+    </style>
+</head>
+<body>
+		<div>
+			<table>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Description</th>
+				<th>Keywords</th>
+				<th>Date_of_media</th>
+				<th>Object URL</th>
+			{% for media in medias %}
+				<tr>
+					<td>{{ media.id }}</td>
+					<td>{{ media.name }}</td>
+					<td>{{ media.description }}</td>
+					<td>{{ media.keyword }}</td>
+					<td>{{ media.date_of_media }}</td>
+					<td>{{ media.object_url }}</td>
+					<td><img src="{{ media.object_url }}" width="auto" height="200" style="margin: 0.5em 0;"/></td>
+				</tr>
+			{% endfor %}
+			</table>
+<!--			{% for video in videos %}-->
+<!--				<video width="320" height="240" controls style="margin: 0.5em 0;">-->
+<!--					<source src="{{ video }}" type="video/mp4">-->
+<!--					Your browser does not support the video tag.-->
+<!--				</video>-->
+<!--			{% endfor %}-->
+		</div>
+	</div>
+</body>
+</html>

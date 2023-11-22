@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>uploadPage</title>
+  <title>Login Page</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,14 +14,14 @@
       padding: 20px;
       border: 1px solid #ccc;
       border-radius: 5px;
-      background-color: #d41717;
+      background-color: #f2f2f2;
     }
 
     .container h2 {
       text-align: center;
     }
 
-    .container label, .container input[type="file"] {
+    .container label, .container input[type="text"], .container input[type="password"] {
       display: block;
       width: 100%;
       margin-bottom: 10px;
@@ -29,26 +29,29 @@
 
     .container input[type="submit"] {
       width: 100%;
-      background-color: #ffffff;
+      background-color: #4CAF50;
       color: #fff;
       border: none;
-      padding: 20px;
+      padding: 10px;
       cursor: pointer;
     }
 
     .container input[type="submit"]:hover {
-      background-color: #000000;
+      background-color: #45a049;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>Upload Media</h2>
-    <form action="upload.php" method="post" enctype="multipart/form-data">
-      <label for="media">Select File:</label>
-      <input type="file" id="media" name="media" accept="image/*, video/*" required>
+    <h2>Login</h2>
+    <form action="/login" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
 
-      <input type="submit" value="Upload">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <input type="submit" value="Login">
     </form>
   </div>
 </body>
