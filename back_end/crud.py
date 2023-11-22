@@ -1,5 +1,4 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import inspect, text, delete
 from . import schemas, models
 from .models import Media, Keyword
 from .database import engine
@@ -24,7 +23,14 @@ def get_media_name(media_id: int, db: Session):
 
 
 def get_media_by_name(db: Session, media_name: str):
-	return db.query(models.Media).filter(models.Media.name == media_name).first()
+	path = Path(__file__).parent
+	with open(f"{path}/sql_script/select_by_name.sql") as f:
+		sql = f.read()
+		sql = sql.replace('{media_name}', f'{media_name}')
+	df = pd.read_sql_query(sql, engine)
+	df.head()
+	return df.to_dict(orient="records")
+	# return db.query(models.Media, Keyword).join(Keyword).filter(models.Media.name == media_name).all()
 
 
 def get_media_by_id(db: Session, media_id: int):
@@ -59,10 +65,3 @@ def create_media_keyword(db: Session, keyword: schemas.Keyword, owner_id: int):
 	db.commit()
 	db.refresh(db_keyword)
 	return db_keyword
-
-# def delete_media_keyword(db: Session, keyword: Keyword):
-# 	result = get_media_by_keyword(db, keyword)
-# 	if result:
-# 		db.delete(result)
-# 		db.commit()
-# 		return "Media with "
