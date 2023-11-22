@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>uploadPage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 500px;
+      margin: 0 auto;
+      margin-top: 100px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #d41717;
+    }
+
+    .container h2 {
+      text-align: center;
+    }
+
+    .container label, .container input[type="file"] {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .container input[type="submit"] {
+      width: 100%;
+      background-color: #ffffff;
+      color: #fff;
+      border: none;
+      padding: 20px;
+      cursor: pointer;
+    }
+
+    .container input[type="submit"]:hover {
+      background-color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Upload Media</h2>
+    <form action="azure-photo" method="post" enctype="multipart/form-data">
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description"required>
+
+      <label for="keyword">Keywords</label>
+      <input type="text" id="keyword" name="keyword" required>
+
+      <label for="file">Select File:</label>
+      <input type="file" id="file" name="file" accept="image/*, video/*" required>
+
+      <input type="submit" value="Upload">
+    </form>
+  </div>
+</body>
+</html>

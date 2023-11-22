@@ -6,9 +6,9 @@ from .database import Base
 class Media(Base):
 	__tablename__ = 'media_metadata'
 	
-	id = Column(Integer, primary_key=True, index=True, default=1)
-	name = Column(String(25), unique=True)
-	description = Column(String(100))
+	id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+	name = Column(String(255), unique=True)
+	description = Column(String(255))
 	date_of_media = Column(Date)
 	object_url = Column(String(255))
 	# keyword = Column(String(25))
