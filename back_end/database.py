@@ -24,16 +24,6 @@ def login(username: str, password: str):
 	try:
 		cnx = mysql.connector.connect(user=username, password=password, host=host, port=3306, database=database)
 		cursor = cnx.cursor()
-		print("getting tables")
-		cursor.execute("show tables;")
-		result = cursor.fetchall()
-		print(f"{result= }")
-
-		cursor.execute("select * from media_metadata;")
-		result = cursor.fetchall()
-		print(f"{result= }")
-
-		print("close")
 		cursor.close()
 
 	except mysql.connector.errors.ProgrammingError as e:

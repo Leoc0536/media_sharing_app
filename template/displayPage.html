@@ -30,6 +30,10 @@
     </style>
 </head>
 <body>
+	<form action="/medias/search" method="post">
+  		<input class="form-control me-2" name="media_name" type="search" placeholder="Search" aria-label="Search">
+  		<button class="btn btn-outline-success" type="submit">Search</button>
+	</form>
 		<div>
 			<table>
 				<th>Id</th>
@@ -38,25 +42,31 @@
 				<th>Keywords</th>
 				<th>Date_of_media</th>
 				<th>Object URL</th>
-			{% for media in medias %}
+			{% for image in images %}
 				<tr>
-					<td>{{ media.id }}</td>
-					<td>{{ media.name }}</td>
-					<td>{{ media.description }}</td>
-					<td>{{ media.keyword }}</td>
-					<td>{{ media.date_of_media }}</td>
-					<td>{{ media.object_url }}</td>
-					<td><img src="{{ media.object_url }}" width="auto" height="200" style="margin: 0.5em 0;"/></td>
+					<td>{{ image.id }}</td>
+					<td>{{ image.name }}</td>
+					<td>{{ image.description }}</td>
+					<td>{{ image.keyword }}</td>
+					<td>{{ image.date_of_media }}</td>
+					<td>{{ image.object_url }}</td>
+					<td><img src="{{ image.object_url }}" width="auto" height="200" style="margin: 0.5em 0;"/></td>
 				</tr>
 			{% endfor %}
+			{% for video in videos %}
+				<td>{{ video.id }}</td>
+				<td>{{ video.name }}</td>
+				<td>{{ video.description }}</td>
+				<td>{{ video.keyword }}</td>
+				<td>{{ video.date_of_media }}</td>
+				<td>{{ video.object_url }}</td>
+				<td><video width="320" height="240" controls style="margin: 0.5em 0;">
+					<source src="{{ video.object_url }}" type="video/mp4">
+					Your browser does not support the video tag.
+				</video></td>
+			{% endfor %}
 			</table>
-<!--			{% for video in videos %}-->
-<!--				<video width="320" height="240" controls style="margin: 0.5em 0;">-->
-<!--					<source src="{{ video }}" type="video/mp4">-->
-<!--					Your browser does not support the video tag.-->
-<!--				</video>-->
-<!--			{% endfor %}-->
-		</div>
+			</div>
 	</div>
 </body>
 </html>
