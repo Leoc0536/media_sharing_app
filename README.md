@@ -22,7 +22,7 @@ First, get default domain
 Then use terminal and locate to 
 ```shell
 git remote add azure <yourpath>
-git push azure app.main:master
+git push azure main:master
 ```
 
 ### Testing in Azure
@@ -30,6 +30,6 @@ git push azure app.main:master
 Once deployed, test different paths on the deployed URL, using either a browser or a tool like Postman.
 
 ```
-http://<FunctionAppName>.azurewebsites.net/sample
-http://<FunctionAppName>.azurewebsites.net/hello/Foo
+http://<FunctionAppName>.azurewebsites.net/login
+http://<FunctionAppName>.azurewebsites.net/medias
 ```
