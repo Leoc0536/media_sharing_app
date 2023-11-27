@@ -24,6 +24,7 @@ def login(username: str, password: str):
 	try:
 		cnx = mysql.connector.connect(user=username, password=password, host=host, port=3306, database=database)
 		cursor = cnx.cursor()
+		cursor.execute("SHOW tables;")
 		cursor.close()
 
 	except mysql.connector.errors.ProgrammingError as e:

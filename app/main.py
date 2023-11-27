@@ -37,18 +37,18 @@ connection_string = os.getenv('connection_string')
 container_name = os.getenv('container_name')
 
 
-@app.get("/upload/", response_class=HTMLResponse, tags=["upload"])
+@app.get("/upload/azure-photo", response_class=HTMLResponse, tags=["upload"])
 async def upload_file(request: Request):
     return template.TemplateResponse("uploadPage.html", {"request": request})
 
 
-@app.post("/upload/", tags=["upload"])
+@app.post("/upload/azure-photo", tags=["upload"])
 async def create_upload_file(description: str = Form(...),
                              keyword: str = Form(...),
                              file: UploadFile = File(...),
                              db: Session = Depends(get_db)):
     file_name = file.filename
-    if crud.get_media_by_name(file_name, db):
+    if get_media_by_name(file_name, db):
         return f"Duplicate entry '{file_name}'"
     if not file:
         return {"message": "No upload file sent"}
@@ -73,7 +73,7 @@ async def create_upload_file(description: str = Form(...),
       object_url=object_url
     )
     await create_media(media, keyword, db)
-    return RedirectResponse("/media", 303)
+    return RedirectResponse("/medias", 303)
     
 
 async def create_media(media: Media, keyword: str, db: Session = Depends(get_db)):
@@ -84,14 +84,14 @@ async def create_media(media: Media, keyword: str, db: Session = Depends(get_db)
     await create_media_keyword(keyword, db_media.id, db)
     
     
-@app.patch("/media/{media_id}/description", tags=["media"])
+@app.patch("/medias/{media_id}/description", tags=["media"])
 async def change_media_description(media_id: int,
                                    description: str,
                                    db: Session = Depends(get_db)):
     return await crud.change_media_description(db=db, media_id=media_id, description=description)
 
 
-@app.post("/media/{media_id}/keyword", tags=["media"])
+@app.post("/medias/{media_id}/keyword", tags=["media"])
 async def create_media_keyword(keyword: Keyword,
                                media_id: int,
                                db: Session = Depends(get_db)):
@@ -101,7 +101,7 @@ async def create_media_keyword(keyword: Keyword,
         return keyword
     return f"{media_id} Does not exist"
 
-@app.post("/media/search", tags=["media"])
+@app.post("/medias/search", tags=["media"])
 def get_media_by_name(request: Request,
                       media_name: str | None = Form(None),
                       db: Session = Depends(get_db)):
@@ -117,7 +117,7 @@ def get_media_by_name(request: Request,
     return RedirectResponse("/medias/", 303)
 
 
-@app.get("/media/", response_class=HTMLResponse, tags=["media"])
+@app.get("/medias/", response_class=HTMLResponse, tags=["media"])
 def read_medias(request: Request):
     medias = crud.get_media_record()
     image, video = [], []
@@ -129,7 +129,7 @@ def read_medias(request: Request):
     return template.TemplateResponse("displayPage.html", {"request": request, "images": image, "videos": video})
 
 
-@app.delete("/media/{media_id}", tags=["media"])
+@app.delete("/medias/{media_id}", tags=["media"])
 async def delete_media(media_id: int, db: Session = Depends(get_db)):
     media_name = crud.get_media_name(media_id, db)
     connector = BlobServiceClient.from_connection_string(connection_string)
