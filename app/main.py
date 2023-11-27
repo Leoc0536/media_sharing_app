@@ -73,7 +73,7 @@ async def create_upload_file(description: str = Form(...),
       object_url=object_url
     )
     await create_media(media, keyword, db)
-    return RedirectResponse("/medias", 303)
+    return RedirectResponse("/media", 303)
     
 
 async def create_media(media: Media, keyword: str, db: Session = Depends(get_db)):
