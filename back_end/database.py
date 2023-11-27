@@ -27,6 +27,5 @@ def login(username: str, password: str):
 		cursor.close()
 
 	except mysql.connector.errors.ProgrammingError as e:
-		print(e)
-	finally:
-		return "Logged in!"
+		return e
+	return "Logged in!"

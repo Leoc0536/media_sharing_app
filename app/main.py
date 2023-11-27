@@ -147,7 +147,7 @@ async def login(username: str = Form(), password: str = Form()):
     credentials = {"username": username, "password": password}
     if check_credentials(credentials) == "Logged in!":
         return RedirectResponse("/upload", 303)
-   
+    return RedirectResponse("/login", 303)
 
 def check_credentials(credentials: dict):
     return back_end.database.login(**credentials)
