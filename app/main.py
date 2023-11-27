@@ -48,7 +48,7 @@ async def create_upload_file(description: str = Form(...),
                              file: UploadFile = File(...),
                              db: Session = Depends(get_db)):
     file_name = file.filename
-    if get_media_by_name(file_name, db):
+    if crud.get_media_by_name(file_name, db):
         return f"Duplicate entry '{file_name}'"
     if not file:
         return {"message": "No upload file sent"}
